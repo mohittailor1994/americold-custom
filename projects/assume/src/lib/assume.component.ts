@@ -14,18 +14,40 @@ export class AssumeComponent implements OnInit {
   constructor(private assumeService: AssumeService, public pop: MatDialog) { }
 
   ngOnInit(): void {
-
-    const valueAssumeUser = this.getCookie('AssumedUser-Test');
-    if (valueAssumeUser) {
-      console.log('Is Assunme User');
-    }
-    else {
-      console.log('Not Assume user');
-    }
-
-    // this.getFacilities();
+    this.getFacilities();
   }
 
+  getFacilities() {
+    const valueAssumeUser = this.getCookie('AssumedUser-Test');
+    if (valueAssumeUser) {
+      console.log('Is Assume User');
+    } else {
+      console.log('Not Assume user');
+    }
+    // this.assumeService.getFacility().subscribe(res => {
+    //
+    //   if (res === "" || res == null || res === undefined) {
+    //
+    //     this.showMessagePopUp('This Application Requires that you Assumes a Warehouses, ' +
+    //       'Customer Order Entry, or Customer User account. Please "Close" to assume one.', 'Success');
+    //   }
+    //   else {
+    //
+    //     this.facilityCustomerData = res;
+    //
+    //     for (let i = 0; i < this.facilityCustomerData.length; i++) {
+    //
+    //       this.facilityCustomerData[i].facilitySelected = false;
+    //       this.facilityCustomerData[i].customerDeatilsList.forEach((d: { checked: boolean; }) => {
+    //         d.checked = false;
+    //       });
+    //     }
+    //     this.assumeService.facilityCustomerData = JSON.stringify(this.facilityCustomerData);
+    //     console.log(this.facilityCustomerData);
+    //   }
+    //
+    // });
+  }
 
   getCookie(cname) {
     const name = cname + '=';
@@ -42,33 +64,6 @@ export class AssumeComponent implements OnInit {
     }
     return '';
   }
-
-  getFacilities() {
-    this.assumeService.getFacility().subscribe(res => {
-
-      if (res === "" || res == null || res === undefined) {
-
-        this.showMessagePopUp('This Application Requires that you Assumes a Warehouses, ' +
-          'Customer Order Entry, or Customer User account. Please "Close" to assume one.', 'Success');
-      }
-      else {
-
-        this.facilityCustomerData = res;
-
-        for (let i = 0; i < this.facilityCustomerData.length; i++) {
-
-          this.facilityCustomerData[i].facilitySelected = false;
-          this.facilityCustomerData[i].customerDeatilsList.forEach((d: { checked: boolean; }) => {
-            d.checked = false;
-          });
-        }
-        this.assumeService.facilityCustomerData = JSON.stringify(this.facilityCustomerData);
-        console.log(this.facilityCustomerData);
-      }
-
-    });
-  }
-
 
   private showMessagePopUp(bodyMsg: string, headerMsg: string) {
     const dialogRef = this.pop.open(MessagePopupComponent, {
