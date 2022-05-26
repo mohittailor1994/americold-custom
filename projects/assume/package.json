@@ -1,0 +1,20 @@
+{
+  "name": "@americold/ng-libraries",
+  "version": "0.0.41",
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14"
+  },
+  "dependencies": {
+    "@angular/cdk": "8.2.3",
+    "@angular/material": "^8.2.3",
+    "core-js": "^3.8.3",
+    "rxjs": "^6.4.0",
+    "tslib": "^2.3.1"
+  },
+  "scripts": {
+    "prepare": "npm run co:login",
+    "preinstall": "npm run co:login",
+    "co:login": "aws codeartifact login --tool npm --repository Angular-npm-library --domain americold --domain-owner 646632670602"
+  }
+}
